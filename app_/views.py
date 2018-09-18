@@ -1,3 +1,4 @@
+#Import modules
 from flask import Flask, request, render_template
 import pickle
 import numpy as np
@@ -14,13 +15,13 @@ def get_delay():
     if request.method=='POST':
         result=request.form
 		
-		#Prepare the feature vector for prediction
+		#Prepare the feature for prediction
 
-        title = result['title']
-        body = result['body']
-        title_body=title+" "+body
-        supervised_tags=predict_S(title_body)
-        unsupervised_tags=predict_U(title_body)
+        title = result['title'] #title
+        body = result['body'] #body
+        title_body=title+" "+body # combine title and body
+        supervised_tags=predict_S(title_body) #Prediction using supervised machine learning models
+        unsupervised_tags=predict_U(title_body) #Prediction using supervised machine learning models
 		
         return render_template('result.html',title=title, body=body, supervised_tags=supervised_tags, unsupervised_tags=unsupervised_tags)
 
