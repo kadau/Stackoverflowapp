@@ -1,3 +1,3 @@
 # Stackoverflowapp
 Predict Stackoverflow questions tag
-![image](kadau.github.com/Stackoverflowapp/img/image.JPG)
+![image](https://github.com/kadau/Stackoverflowapp/blob/master/img/image.JPG)
