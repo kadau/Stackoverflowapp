@@ -1,5 +1,4 @@
 # Import modules
-
 import re
 import nltk
 from nltk.corpus import stopwords
@@ -8,7 +7,6 @@ from sklearn.externals import joblib
 import pickle
 
 # Most important Tags with more frequency. It will be used for supervised models
-
 tag_s=['.net', 'actionscript-3', 'ajax', 'algorithm', 'apache','arrays', 'asp.net', 'asp.net-mvc',\
 'c', 'c#', 'c++', 'cocoa','cocoa-touch', 'css', 'database', 'debugging', 'delphi', 'design','design-patterns',\
 'django', 'eclipse', 'excel', 'flash', 'flex','html', 'iis', 'internet-explorer', 'iphone', 'java', 'javascript',\
@@ -19,7 +17,6 @@ tag_s=['.net', 'actionscript-3', 'ajax', 'algorithm', 'apache','arrays', 'asp.ne
 'windows', 'winforms', 'wpf', 'xml']
 
 # Words that appear most of the time. We will remove them.
-
 most_freq_w=['using','like', 'im', 'would', 'use', 'code', 'get', 'way', 'new', 'want']
 
 # Words that rarely appear. We will remove them.
