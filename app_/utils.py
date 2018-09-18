@@ -1,9 +1,13 @@
+# Import modules
+
 import re
 import nltk
 from nltk.corpus import stopwords
 nltk.download('stopwords')
 from sklearn.externals import joblib
 import pickle
+
+# Most important Tags with more frequency. It will be used for supervised models
 
 tag_s=['.net', 'actionscript-3', 'ajax', 'algorithm', 'apache','arrays', 'asp.net', 'asp.net-mvc',\
 'c', 'c#', 'c++', 'cocoa','cocoa-touch', 'css', 'database', 'debugging', 'delphi', 'design','design-patterns',\
@@ -14,12 +18,16 @@ tag_s=['.net', 'actionscript-3', 'ajax', 'algorithm', 'apache','arrays', 'asp.ne
 'user-interface', 'vb.net', 'version-control','visual-studio', 'visual-studio-2008', 'wcf', 'web-services', 'winapi',\
 'windows', 'winforms', 'wpf', 'xml']
 
+# Words that appear most of the time. We will remove them.
+
 most_freq_w=['using','like', 'im', 'would', 'use', 'code', 'get', 'way', 'new', 'want']
 
+# Words that rarely appear. We will remove them.
 less_feq_w=['efdestroyworksheetws', 'jltmatrix0length', 'offltagtltligtthis','postmessagemyprojectentitiesbetmessage',\
 'columnsfooter', 'omittednote', 'classestaskm95720090413', 'httpossoetikerchrrdtoo', 'addcontrolstolistccontrols',\
 'dofollowuplots']
 
+# List of eligible tags for Cluster 0. We got that list for LDA model.
 cluster_0=['c#', '.net', 'java', 'asp.net', 'c++', 'javascript', 'python', 'php', 'windows', 'html', 'xml', 'ruby',\
 'css', 'linux', 'svn', 'winforms', 'language-agnostic', 'unit-testing', 'vb.net', 'user-interface', 'macos', 'performance',\
 'algorithm', 'sql', 'ruby-on-rails', 'version-control', 'web-services', 'database', 'oop', 'multithreading', 'wpf',\
@@ -31,6 +39,7 @@ cluster_0=['c#', '.net', 'java', 'asp.net', 'c++', 'javascript', 'python', 'php'
 'caching', 'cocoa', 'authentication', 'xslt', 'events', 'collections', 'dom', 'sockets', 'cross-platform', 'date',\
 'compiler-construction', 'email', 'serialization', 'moss', 'file', 'tdd', 'django', 'asp.net-ajax']
 
+# List of eligible tags for Cluster 1. We got that list for LDA model.
 cluster_1=['sql-server', 'sql', 'database', 'mysql', 'sql-server-2005', '.net', 'oracle', 'tsql', 'c#', 'linq-to-sql',\
 'asp.net', 'linq', 'stored-procedures', 'php', 'performance', 'database-design', 'ms-access', 'indexing', 'security',\
 'reporting-services', 'vb.net', 'optimization', 'java', 'sql-server-2000', 'postgresql', 'full-text-search', 'sqlite',\
@@ -43,6 +52,7 @@ cluster_1=['sql-server', 'sql', 'database', 'mysql', 'sql-server-2005', '.net', 
 'excel', 'rdbms', 'linux', 'testing', 'dataset', 'statistics', 'email', 'data-structures', 'refactoring', 'iis', 'svn',\
 'datatable', 'language-agnostic', 'multithreading', 'hibernate', 'import', 'data-migration']
 
+# List of eligible tags for Cluster 2. We got that list for LDA model.
 cluster_2=['visual-studio', 'visual-studio-2008', '.net', 'debugging', 'c++', 'c#', 'version-control', 'asp.net',\
 'visual-studio-2005', 'asp.net-mvc', 'iis', 'code-review', 'stl', 'webproject', 'windbg', 'symbols', 'vb.net', 'ide',\
 'windows', 'visual-c++', 'svn', 'winforms', 'tfs', 'visual-sourcesafe', 'installation', 'unit-testing', 'intellisense',\
@@ -58,7 +68,7 @@ cluster_2=['visual-studio', 'visual-studio-2008', '.net', 'debugging', 'c++', 'c
 
 stop=stopwords.words("english")
 
-
+#Cleaning text and keep key words
 def clean_p(text):
     text = " ".join(x.lower() for x in text.split() ) 
     text=re.sub('[^\w\s]', "", text)                           
@@ -67,7 +77,8 @@ def clean_p(text):
     text = " ".join(x for x in text.split() if x not in most_freq_w)
     text = " ".join(x for x in text.split() if x not in less_feq_w)
     return(text)
-	
+
+#Predicting questions tags with supervised models
 def predict_S(text):
     linearSVC = joblib.load('linearSVC_.pkl')
     text=[clean_p(text)]
@@ -79,6 +90,7 @@ def predict_S(text):
     tags_="".join('<'+x+'>' for x in tags)
     return tags_
 
+#Predicting questions tags with unsupervised models
 def predict_U(text):
     text=text.lower()
     text = " ".join(x for x in text.split() if x not in most_freq_w)
