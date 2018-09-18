@@ -1,0 +1,64 @@
+<html>
+<title>Prediction des retards de vols</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="{{ url_for('static', filename='background.css') }}">
+<style>
+body,h1 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+.bgimg {
+    background-image: img src = 'bg.jpg';
+    min-height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+</style>
+<body>
+<h1 align="center"><b>PROJECT 6 StackOverflow QUESTION TAG PREDICTION</b></h1>
+<table style="height: 431px; width: 1100px;" align="center" valign="middle">
+<tbody>
+<tr style="height: 32px;">
+<td style="width: 44px; height: 32px;"><strong>Title</strong></td>
+<td style="width: 202px; height: 32px;"><textarea cols="60" name="title" rows="1">{{title}}</textarea></td>
+<td style="width: 16px; height: 420.333px;" rowspan="5">&nbsp;</td>
+<td style="width: 276px; height: 40.6667px;" rowspan="2">&nbsp;&nbsp;</td>
+<td style="width: 42px; height: 420.333px;" rowspan="5">&nbsp;</td>
+<td style="width: 52px; height: 420.333px;" rowspan="5">&nbsp;
+<table style="height: 294px; width: 244px;">
+<tbody>
+<tr style="height: 11px;">
+<td style="width: 234.667px; height: 11px;" bgcolor=#99ddff>Tags predicted using supervised Machine learning model:&nbsp;&nbsp;</td>
+</tr>
+<tr style="height: 59px;">
+<td style="width: 234.667px; height: 59px;">{{supervised_tags}}</td>
+</tr>
+<tr style="height: 58px;">
+<td style="width: 234.667px; height: 58px;" bgcolor=#99ddff>Tags predicted using unsupervised Machine learning model&nbsp;&nbsp;</td>
+</tr>
+<tr style="height: 78px;">
+<td style="width: 234.667px; height: 78px;">{{unsupervised_tags}}</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr style="height: 8.66667px;">
+<td style="width: 44px; height: 346.667px;" rowspan="3" valign="top"><strong>Body</strong></td>
+<td style="width: 202px; height: 346.667px;" rowspan="3"><textarea cols="60" name="body" rows="25">{{body}}</textarea></td>
+</tr>
+<tr style="height: 136px;">
+<td style="width: 276px; height: 136px;" valign="bottom"><span style="text-decoration: underline; color: #008080;"><strong>Read Before Running predict:</strong></span></td>
+</tr>
+<tr style="height: 202px;">
+<td style="width: 276px; height: 202px;" valign="top"><span style="font-size: xx-small;">This API predict StackOverflow question tags using both <strong><em>supervised</em> </strong>and <em><strong>unsupervised</strong></em> algorithms</span></td>
+</tr>
+<tr style="height: 41.6667px;">
+<td style="width: 246px; height: 41.6667px; text-align: center;" colspan="2"><button  onclick="window.location.href='{{ url_for('home')}}'">New prediction</button>
+</td>
+<td style="width: 276px; height: 41.6667px;"  colspan="3" align="center"><span style="font-size: xx-small;">&nbsp;@dom @ugustin 2018</span></td>
+</tr>
+</table>
+</body>
+</html>
